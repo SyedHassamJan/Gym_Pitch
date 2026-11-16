@@ -208,17 +208,20 @@ html.motion .preloader {
 @media (min-width: 60.01rem) { .menu-sheet { display: none; } }
 
 /* ---------- hero ---------- */
-.hero { position: relative; min-height: min(calc(100svh - var(--header-h)), 960px); display: grid; align-items: center; padding-block: var(--space-2xl); }
-.hero__grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: var(--gap-columns); align-items: center; }
-.hero__copy { display: grid; gap: var(--space-lg); justify-items: start; position: relative; z-index: var(--z-raised); }
-.hero__title { font-size: var(--text-hero); max-width: 9ch; }
-.hero__title .line { display: block; overflow: hidden; padding-right: 0.08em; }
+/* Exactly one screen under the header (svh, so mobile browser bars never cut it), with a floor for very short windows. */
+.hero { --hero-h: max(calc(100svh - var(--header-h)), 30rem); position: relative; height: var(--hero-h); }
+.hero__grid { height: 100%; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--gap-columns); align-items: center; }
+.hero__copy { display: grid; gap: var(--space-lg); justify-items: start; position: relative; z-index: var(--z-raised); padding-block: var(--space-lg); }
+/* Two lines on desktop; sized by width and height so it never outgrows the screen. */
+.hero__title { font-size: clamp(3rem, min(8.5vw, 14svh), 9rem); }
+.hero__title .line { display: block; overflow: hidden; padding-right: 0.08em; white-space: nowrap; }
 .hero__title .line__inner { display: block; }
 .hero__sentence { font-size: var(--text-lead); color: var(--color-ink-2); max-width: 36ch; }
 .hero__next { font-size: var(--text-sm); color: var(--color-muted); max-width: 40ch; }
 .hero__actions { display: grid; gap: var(--space-sm); justify-items: start; margin-top: var(--space-xs); }
 
-.hero__frame { position: relative; height: min(72svh, 680px); min-height: 440px; transform: skewX(calc(-1 * var(--slant))); overflow: hidden; background: var(--color-surface); color: var(--color-bone); margin-right: calc(var(--space-lg) + 5%); }
+/* Full hero height. The 18-degree skew pushes the top-right corner out by height x tan(18deg) / 2; keep it inside the gutter. */
+.hero__frame { position: relative; align-self: stretch; height: 100%; transform: skewX(calc(-1 * var(--slant))); overflow: hidden; background: var(--color-surface); color: var(--color-bone); margin-right: max(0px, calc(var(--hero-h) * 0.1625 - var(--gutter) + var(--space-xs))); }
 .hero__frame::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; outline: 1px solid color-mix(in oklab, var(--color-bone) 14%, transparent); outline-offset: -1px; }
 .hero__shot { position: absolute; inset: 0 -36%; transform: skewX(var(--slant)); }
 .hero__shot img { object-fit: cover; object-position: 50% 40%; }
@@ -229,10 +232,16 @@ html.motion-run .hero__curtain { animation: none; }
 @keyframes curtain-safety { to { transform: translateX(101%); } }
 @keyframes line-safety { to { transform: none; } }
 
+/* Mobile: the photo sits behind the text as a dimmed skewed panel, so it never pushes the button down. */
 @media (max-width: 60rem) {
-  .hero { min-height: 0; padding-block: var(--space-xl) var(--space-2xl); }
-  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
-  .hero__frame { height: auto; aspect-ratio: 5 / 4; min-height: 0; margin-inline: var(--space-xl); }
+  .hero__grid { position: relative; grid-template-columns: minmax(0, 1fr); }
+  .hero__title { font-size: clamp(2.75rem, min(14vw, 10svh), 5.5rem); }
+  .hero__frame { position: absolute; top: 0; bottom: 0; right: calc(-1 * var(--gutter)); width: 66%; height: auto; margin: 0; z-index: 0; }
+  /* A tall, narrow frame skews further than the desktop one: widen the counter-skewed photo so it covers every corner. */
+  .hero__shot { inset: 0 -110%; }
+  .hero__shot img { filter: brightness(0.38); object-position: 62% 40%; }
+  /* Text crosses the dimmed photo here: full bone keeps it at 4.5:1 or better against the brightest pixel behind it. */
+  .hero__sentence, .hero__next { color: var(--color-ink); }
 }
 
 /* ---------- sections ---------- */

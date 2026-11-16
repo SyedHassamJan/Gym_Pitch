@@ -35,7 +35,7 @@ export function Hero() {
                 fill
                 preload
                 fetchPriority="high"
-                sizes="(max-width: 60rem) 92vw, 50vw"
+                sizes="(max-width: 60rem) 80vw, 50vw"
                 quality={75}
               />
             </div>
