@@ -1,4 +1,4 @@
-import { plans, currency, offer } from "@/lib/content";
+import { plans, formatPrice, offer } from "@/lib/content";
 import { TrialButton } from "@/components/ui/TrialButton";
 import { FeaturedScale } from "@/components/motion/FeaturedScale";
 
@@ -22,7 +22,7 @@ export function Membership() {
                 </div>
                 <p className="plan__price">
                   <span className="plan__amount num">
-                    {currency.label}&nbsp;{p.price.toLocaleString("en-US")}
+                    {formatPrice(p.price)}
                   </span>
                   <span className="plan__unit">a month</span>
                 </p>

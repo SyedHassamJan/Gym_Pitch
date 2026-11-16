@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
-import { site, hours, plans, currency, hero, programs } from "@/lib/content";
+import { site, hours, plans, currency, formatPrice, hero, programs } from "@/lib/content";
 import "./globals.css";
 
 const display = Barlow_Condensed({
@@ -61,7 +61,7 @@ const jsonLd = {
     ...(site.address ? { streetAddress: site.address } : {}),
   },
   openingHours: hours.schema,
-  priceRange: `${currency.label} ${plans[0].price.toLocaleString("en-US")} to ${plans[plans.length - 1].price.toLocaleString("en-US")} a month`,
+  priceRange: `${formatPrice(plans[0].price)} to ${formatPrice(plans[plans.length - 1].price)} a month`,
   makesOffer: plans.map((p) => ({
     "@type": "Offer",
     name: `${p.name} membership`,

@@ -138,27 +138,34 @@ export const plans = [
   {
     id: "basic",
     name: "Basic",
-    price: 4000,
+    price: 29,
     features: ["Gym floor access", "Locker room", "2 group classes a week"],
     featured: false,
   },
   {
     id: "pro",
     name: "Pro",
-    price: 7000,
+    price: 59,
     features: ["Unlimited gym access", "Unlimited classes", "1 PT session a month", "Diet consultation"],
     featured: true,
   },
   {
     id: "elite",
     name: "Elite",
-    price: 12000,
+    price: 149,
     features: ["Everything in Pro", "4 PT sessions a month", "Custom meal plan"],
     featured: false,
   },
 ];
 
-export const currency = { code: "PKR", label: "Rs" };
+// CONFIRM: monthly prices in US dollars, set at typical gym rates (Basic: floor access; Pro: classes + 1 PT
+// session; Elite: 4 PT sessions + meal plan). Change `code` and `locale` to switch currency everywhere.
+export const currency = { code: "USD", locale: "en-US" };
+
+/** "$59", or the same amount in whatever currency `currency` names. */
+export function formatPrice(amount: number) {
+  return new Intl.NumberFormat(currency.locale, { style: "currency", currency: currency.code, maximumFractionDigits: 0 }).format(amount);
+}
 
 /**
  * Real member quotes only, with the member's permission.
