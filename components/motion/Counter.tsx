@@ -22,6 +22,8 @@ export function Counter({ value, decimals = 0, suffix = "", className }: Counter
 
   useMotion(ref, ({ gsap, ScrollTrigger }) => {
     const el = ref.current!;
+    // Already on screen when motion arrived: keep the final figure rather than reset it to 0.
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
     const state = { n: 0 };
     const render = () => (el.textContent = format(state.n, decimals) + suffix);
     render();

@@ -205,6 +205,54 @@ export const nav = [
   { href: "#faq", label: "FAQ" },
 ];
 
+/* ---------- Body scan ---------- */
+
+export type ZoneId = "shoulders" | "chest" | "back" | "core" | "legs";
+
+export type Zone = {
+  id: ZoneId;
+  name: string;
+  /** Short quality label that fades in beside the zone during the scan. */
+  tag: string;
+  /** programs[].id that trains this zone. */
+  program: string;
+  exercises: [string, string, string];
+};
+
+export const bodyScan = {
+  heading: "See what we train",
+  lede: "Scroll to scan. Pick a zone to see the program and three moves that build it.",
+  zones: [
+    { id: "shoulders", name: "Shoulders", tag: "Strength", program: "strength", exercises: ["Overhead press", "Lateral raise", "Face pull"] },
+    { id: "chest", name: "Chest", tag: "Push", program: "strength", exercises: ["Bench press", "Push-up", "Incline dumbbell press"] },
+    { id: "back", name: "Back", tag: "Pull", program: "strength", exercises: ["Deadlift", "Lat pulldown", "Barbell row"] },
+    { id: "core", name: "Core", tag: "Core", program: "hiit", exercises: ["Plank", "Mountain climbers", "Hanging knee raise"] },
+    { id: "legs", name: "Legs", tag: "Power", program: "strength", exercises: ["Back squat", "Romanian deadlift", "Walking lunge"] },
+  ] satisfies Zone[],
+};
+
+/* ---------- Calorie and macro calculator ---------- */
+
+export const calculator = {
+  heading: "Know your numbers",
+  lede: "A daily calorie and macro estimate from your size, activity and goal.",
+  cta: "Get this plan from a coach",
+  note: "Estimates from the Mifflin-St Jeor equation, not medical advice. If you are under 18, pregnant or managing a health condition, speak to a doctor first.",
+  activity: [
+    { id: "sedentary", label: "Mostly sitting", factor: 1.2 },
+    { id: "light", label: "Light exercise, 1 to 3 days a week", factor: 1.375 },
+    { id: "moderate", label: "Moderate exercise, 3 to 5 days a week", factor: 1.55 },
+    { id: "active", label: "Hard exercise, 6 to 7 days a week", factor: 1.725 },
+    { id: "athlete", label: "Training twice a day or a physical job", factor: 1.9 },
+  ],
+  goals: [
+    { id: "lose", label: "Lose fat" },
+    { id: "build", label: "Build muscle" },
+    { id: "maintain", label: "Maintain" },
+  ],
+  limits: { age: [16, 80], height: [130, 220], weight: [35, 250] } as Record<"age" | "height" | "weight", [number, number]>,
+};
+
 // Library photo credits (CC licences require them on the page).
 export const credits = [
   { label: "Drmirshak", href: "https://commons.wikimedia.org/wiki/File:Naam_Yoga_LA_Class.jpg", licence: "CC BY-SA 3.0" },

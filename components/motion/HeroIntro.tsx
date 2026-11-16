@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { useMotion, motion } from "@/lib/motion";
+import { useIntro, motion } from "@/lib/motion";
 
-/** When the CSS preloader finishes leaving (globals.css: 760ms delay + 520ms). */
-const PRELOADER_DONE = 1.1;
+/** When the CSS preloader finishes leaving (globals.css: 420ms delay + 400ms). */
+const PRELOADER_DONE = 0.82;
 
 /**
  * Hero entrance: masked, staggered headline lines and a skewed curtain wiping off the photograph.
@@ -14,7 +14,7 @@ const PRELOADER_DONE = 1.1;
 export function HeroIntro({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useMotion(ref, ({ gsap }) => {
+  useIntro(ref, ({ gsap }) => {
     const html = document.documentElement;
     if (!html.classList.contains("motion")) return;
 
@@ -36,8 +36,8 @@ export function HeroIntro({ children }: { children: ReactNode }) {
 
     const delay = Math.max(0, PRELOADER_DONE - performance.now() / 1000);
     const tl = gsap.timeline({ delay, defaults: { ease: motion.ease } });
-    tl.to(lines, { yPercent: 0, duration: 0.9, stagger: 0.12 });
-    if (curtain) tl.to(curtain, { xPercent: 101, duration: 0.9, ease: motion.easeInOut }, 0.1);
+    tl.to(lines, { yPercent: 0, duration: 0.75, stagger: 0.1 });
+    if (curtain) tl.to(curtain, { xPercent: 101, duration: 0.75, ease: motion.easeInOut }, 0.1);
     if (shot) tl.from(shot, { scale: 1.12, duration: 1.4, ease: "power2.out", clearProps: "scale" }, 0.1);
     if (fades.length) tl.to(fades, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, clearProps: "transform,opacity,visibility" }, 0.45);
   });

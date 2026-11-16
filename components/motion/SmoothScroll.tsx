@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { loadMotion, prefersReducedMotion } from "@/lib/motion";
+import { loadScroll, prefersReducedMotion } from "@/lib/motion";
 
 /**
  * Lenis driven by the GSAP ticker, so smooth scroll and ScrollTrigger share one clock.
@@ -13,8 +13,10 @@ export function SmoothScroll() {
     let cancelled = false;
     let teardown: (() => void) | undefined;
 
-    Promise.all([import("lenis"), loadMotion()]).then(([{ default: Lenis }, { gsap, ScrollTrigger }]) => {
+    // Lenis starts with the scroll layer, once the page is idle; native scrolling works until then.
+    Promise.all([import("lenis"), loadScroll()]).then(([{ default: Lenis }, { gsap, ScrollTrigger }]) => {
       if (cancelled) return;
+      // A visitor who already scrolled keeps their place: Lenis takes over from the current position.
       const header = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 72;
       const lenis = new Lenis({ autoRaf: false, lerp: 0.12, anchors: { offset: -(header + 24) } });
       lenis.on("scroll", ScrollTrigger.update);

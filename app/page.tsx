@@ -9,6 +9,9 @@ import { Membership } from "@/components/sections/Membership";
 import { Proof } from "@/components/sections/Proof";
 import { Faq } from "@/components/sections/Faq";
 import { LeadForm } from "@/components/sections/LeadForm";
+import { LazyBodyScan, LazyCalculator } from "@/components/sections/lazy";
+import { BodyScanFallback } from "@/components/sections/BodyScanFallback";
+import { CalculatorFallback } from "@/components/sections/CalculatorFallback";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { site } from "@/lib/content";
 
@@ -29,7 +32,13 @@ export default function Home() {
         <Hero />
         <Stats />
         <About />
+        <LazyBodyScan>
+          <BodyScanFallback />
+        </LazyBodyScan>
         <Programs />
+        <LazyCalculator>
+          <CalculatorFallback />
+        </LazyCalculator>
         <Coaches />
         <Membership />
         <Proof />

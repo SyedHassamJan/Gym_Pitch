@@ -5,7 +5,7 @@ import "./globals.css";
 
 const display = Barlow_Condensed({
   weight: "700",
-  style: ["normal", "italic"],
+  style: "italic",
   subsets: ["latin"],
   display: "swap",
   variable: "--font-barlow-condensed",
