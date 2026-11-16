@@ -1,0 +1,41 @@
+[
+ {
+  "shape": "the session, warm-up to first class",
+  "theme": "custom",
+  "axes": "dark/display-condensed/warm",
+  "hero": "headline left, squat photo in an 18-degree parallelogram right, curtain wipe",
+  "nav": "sticky bar, wordmark, four links, trial button",
+  "footer": "magnetic trial button over a five-column ledger",
+  "imagery": "photographs, FitPro stand-ins 13, library 1",
+  "photos": [
+   "Naam_Yoga_LA_Class.jpg"
+  ],
+  "entry": "preloader then masked headline",
+  "fingerprint": "hero/stats/timetable/sticky-stack/coaches/bone-pricing/parallax-proof/bone-faq/form/footer",
+  "sections": [
+   "hero",
+   "stats",
+   "about+timetable",
+   "programs stack",
+   "coaches",
+   "membership",
+   "proof",
+   "faq",
+   "lead form",
+   "footer"
+  ],
+  "signature": "the 18-degree parallelogram on the hero photo and every button",
+  "waived": [
+   "22",
+   "38ii",
+   "42",
+   "39b",
+   "85",
+   "59",
+   "77"
+  ],
+  "prompt": "FitPro gym landing page, Lahore, Ember palette",
+  "date": "2026-11-16",
+  "mode": "build"
+ }
+]
