@@ -50,7 +50,7 @@ export const hours = {
 
 export const hero = {
   headline: ["Train harder.", "Live stronger."],
-  sentence: "Strength, HIIT and real coaching in Lahore, for goals you thought impossible.",
+  sentence: "Strength, HIIT and real coaching in your area, for goals you thought impossible.",
   image: {
     src: "/images/header-2.jpg",
     width: 1800,
